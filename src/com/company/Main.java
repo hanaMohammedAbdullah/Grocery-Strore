@@ -1,53 +1,15 @@
 package com.company;
 import collection.*;
-import com.company.Data.Category;
+import com.company.Model.Category;
 
 import java.util.List;
 
 public class Main  {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        managerTaskService service=new ManagerEmployeeTaskService();
-
-        service.addCategory(new Category(1,"Milk","It is good for Body"));
-        service.addCategory(new Category(2,"Meat","It is delicious"));
-        service.addCategory(new Category(3,"vegetables","It is Healthy"));
-
-        List<Category> catList=service.showAllCategory();
-
-        for (Category cat:catList) {
-            System.out.println(cat.getCategoryID()+" "+cat.getCategoryType()+" "+cat.getCategoryDescription());
-        }
-
-        Category update=new Category(1,"Fruit","It Contain All Vitamin");
-        service.updateCategory(update);
-
-        System.out.println("Updated Category after update operation");
-
-        catList=service.showAllCategory();
-        for (Category cat:catList) {
-            System.out.println(cat.getCategoryID()+" "+cat.getCategoryType()+" "+cat.getCategoryDescription());
-        }
-
-        Category delete=new Category(1,"Fruit","It Contain All Vitamin");
-        service.deleteCategory(delete);
-
-        System.out.println(" Category after remove operation");
-
-        catList=service.showAllCategory();
-        for (Category cat:catList) {
-            System.out.println(cat.getCategoryID()+" "+cat.getCategoryType()+" "+cat.getCategoryDescription());
-        }
-
-
-
-
-
-
-
-
-
+      ManagerDemo demo = new ManagerDemo();
+      ManagerDemo.CategoryDemo();
 
 
 //        try {

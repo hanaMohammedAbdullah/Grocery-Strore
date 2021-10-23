@@ -1,8 +1,8 @@
 package collection;
 
-import com.company.Data.Category;
-import com.company.Data.Product;
-import com.company.Data.employee;
+import com.company.Model.Category;
+import com.company.Model.Product;
+import com.company.Model.employee;
 
 import java.util.List;
 

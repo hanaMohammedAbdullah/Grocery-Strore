@@ -1,6 +1,6 @@
 package collection;
 
-import com.company.Data.*;
+import com.company.Model.*;
 
 import java.util.List;
 
