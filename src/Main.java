@@ -1,4 +1,4 @@
-import Collection.ManagerEmploDemo;
+import Controller.ManagerEmploDemo;
 
 import java.util.Scanner;
 
