@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public interface ManageEmplo {
 
+
     abstract Object getEmployee(String id) throws IOException;
 
     abstract void getList() throws IOException;

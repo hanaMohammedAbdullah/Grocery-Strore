@@ -1,17 +1,13 @@
-import Controller.ManagerEmploDemo;
-import Controller.MnagerCategoryDemo;
+import Controller.viewController;
+import View.ManagerEmploDemo;
+import View.MnagerCategoryDemo;
 
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Scanner sc=new Scanner(System.in);
-        Scanner Input=new Scanner(System.in);
-        System.out.println("--------------------------------------------------");
-        System.out.println(" Grocery Shop System ");
-        System.out.println("--------------------------------------------------");
-        ManagerEmploDemo.ManagerEmployee();
-        //MnagerCategoryDemo.ManageCatDemo();
+        // View Controller to change between the different screen
+        viewController.ViewController();
     }
 }

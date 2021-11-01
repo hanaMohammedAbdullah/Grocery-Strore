@@ -1,5 +1,6 @@
-package Controller;
+package View;
 
+import Controller.DataBase;
 import Model.ManageEmplo;
 import Model.employee;
 
@@ -235,6 +236,7 @@ public class ManagerEmploDemo implements ManageEmplo {
                     break;
 
                 case 8:
+                    employees= (List<employee>) DataBase.LoadDataOfFile(type,path);
                     System.out.println("Enter the age to filter :");
                     int ages=input.nextInt();
                     employees.stream().filter(S->S.getAge() > ages).forEach(t->System.out.println("name: "+t.getName() + " - age: "+t.getAge()));
