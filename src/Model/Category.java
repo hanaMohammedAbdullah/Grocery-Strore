@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Category implements Serializable {
-     public int categoryID;
-     public String categoryType;
-     public String categoryDescription;
+      int categoryID;
+      String categoryType;
+      String categoryDescription;
 
-    public Category(int catid) {
-        super();
-    }
+  public Category(){
+      super();
+  }
 
     public Category(int categoryID, String categoryType, String categoryDescription){
         super();
@@ -27,6 +27,7 @@ public class Category implements Serializable {
         this.categoryID = categoryID;
     }
 
+
     public String getCategoryDescription() {
         return categoryDescription;
     }
@@ -34,6 +35,7 @@ public class Category implements Serializable {
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
     }
+
 
     public String getCategoryType() {
         return categoryType;
@@ -56,5 +58,11 @@ public class Category implements Serializable {
         return Objects.hash(categoryID);
     }
 
-
+    @Override
+    public String toString() {
+        return
+                "categoryID : " + categoryID +
+                "\ncategoryType : " + categoryType +
+                "\ncategoryDescription : " + categoryDescription +"\n------------------------------------------";
+    }
 }

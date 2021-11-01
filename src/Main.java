@@ -1,4 +1,5 @@
 import Controller.ManagerEmploDemo;
+import Controller.MnagerCategoryDemo;
 
 import java.util.Scanner;
 
@@ -11,5 +12,6 @@ public class Main {
         System.out.println(" Grocery Shop System ");
         System.out.println("--------------------------------------------------");
         ManagerEmploDemo.ManagerEmployee();
+        //MnagerCategoryDemo.ManageCatDemo();
     }
 }

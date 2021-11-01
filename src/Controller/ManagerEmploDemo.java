@@ -13,13 +13,13 @@ public class ManagerEmploDemo implements ManageEmplo {
 
         Scanner sc = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
-
+        String type="employee";
         String path="src\\Files\\Employee.txt";
-        List<employee> employees= new ArrayList<>();
+        List<employee> employees;
 
         // Loading the data
         try {
-             employees= (List<employee>) DataBase.LoadDataOfFile(path);
+             employees= (List<employee>) DataBase.LoadDataOfFile(type,path);
         }catch (FileNotFoundException exception){
             employees= new ArrayList<>();
         }
@@ -93,9 +93,7 @@ public class ManagerEmploDemo implements ManageEmplo {
 
                         while (li.hasNext()) {
                             employee e = (employee) li.next();
-
                             if (e.getEid() == emplo) {
-
                                 found = true;
                                 System.out.println(e);
                             }
@@ -180,24 +178,15 @@ public class ManagerEmploDemo implements ManageEmplo {
 
                                 System.out.println(e);
                             }
-                        }
-                        if ((found)) {
+                        }if ((found)) {
                             System.out.println("--------------------------------------------------");
                             DataBase.SaveDataToFile(path,employees);
-                            System.out.println("The Record Update Successfully");
-                            System.out.println("--------------------------------------------------");
-
+                            System.out.println("The Record Update Successfully\n--------------------------------------------------");
                         }
                         else{
-                            System.out.println("--------------------------------------------------");
-
-                            System.out.println("Record not Found....!");
-
-                            System.out.println("--------------------------------------------------");
+                            System.out.println("--------------------------------------------------\nRecord not Found....!\n--------------------------------------------------");
                         }
-
                     }
-
                     else{
                         System.out.println("--------------------------------------------------\n"+"File Doesn't Exist....!"+"--------------------------------------------------");
                     }
@@ -237,9 +226,7 @@ public class ManagerEmploDemo implements ManageEmplo {
                         li = employees.listIterator();
 
                         while (li.hasNext()) {
-
                             System.out.println(li.next());
-
                         }
                     }
                     else{
@@ -248,7 +235,6 @@ public class ManagerEmploDemo implements ManageEmplo {
                     break;
 
                 case 8:
-                    employees= (List<employee>) DataBase.LoadDataOfFile(path);
                     System.out.println("Enter the age to filter :");
                     int ages=input.nextInt();
                     employees.stream().filter(S->S.getAge() > ages).forEach(t->System.out.println("name: "+t.getName() + " - age: "+t.getAge()));
