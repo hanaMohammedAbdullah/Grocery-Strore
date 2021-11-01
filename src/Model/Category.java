@@ -61,7 +61,7 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return
-                "categoryID : " + categoryID +
+                "\n              Category Infromation          \n------------------------------------------"+"\nScategoryID : " + categoryID +
                 "\ncategoryType : " + categoryType +
                 "\ncategoryDescription : " + categoryDescription +"\n------------------------------------------";
     }

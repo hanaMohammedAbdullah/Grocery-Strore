@@ -12,9 +12,9 @@ public class MnagerCategoryDemo {
 
     Scanner input = new Scanner(System.in);
 
-    List<Category> categories = new ArrayList<>();
+    List<Category> categories ;
 
-    ListIterator li = null;
+    ListIterator li ;
     String type="cat";
     String path = "src\\Files\\categories.txt";
 
@@ -34,11 +34,11 @@ public class MnagerCategoryDemo {
         System.out.println("5.Update a  Ctaegory :");
         System.out.println("0.Exit from Category: ");
         choose = input.nextInt();
-        System.out.println("--------------------------------------------------");
+
         int CateTimes;
         switch (choose) {
             case 1:
-                System.out.println("\nWelcome manager how many category you will add");
+                System.out.println("--------------------------------------------------\nWelcome manager how many category you will add");
 
                 CateTimes = input.nextInt();
                 for (int i = 0; i < CateTimes; i++) {
@@ -61,7 +61,6 @@ public class MnagerCategoryDemo {
                 categories.add(new Category(CatEid, CatType, CatDes));
             }
                 }
-                System.out.println("--------------------------------------------------");
                 DataBase.SaveDataToFile(path,categories);
                 break;
             case 2:
