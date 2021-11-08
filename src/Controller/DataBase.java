@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Category;
+import Model.Product;
 import Model.employee;
 
 import java.io.*;
@@ -15,6 +16,8 @@ public class DataBase  {
         }
         else if(path.equals("src\\Files\\categories.txt")) {
             saveCat(path, (List<Category>) list);
+        }else if(path.equals("src\\Files\\Product.txt")) {
+            savePro(path, (List<Product>) list);
         }
 
 
@@ -25,6 +28,14 @@ public class DataBase  {
         FileOutputStream FOS=new FileOutputStream(file);
         ObjectOutputStream oos =new ObjectOutputStream(FOS);
         oos.writeObject(employeeList);
+        oos.close();
+
+    }
+    private static void savePro(String path,List<Product> productList) throws IOException {
+        File file= new File(path);
+        FileOutputStream FOS=new FileOutputStream(file);
+        ObjectOutputStream oos =new ObjectOutputStream(FOS);
+        oos.writeObject(productList);
         oos.close();
 
     }
@@ -44,6 +55,8 @@ public class DataBase  {
         }
         else if(type.equals("cat")) {
            list= LoadCat(Path);
+        }else if(type.equals("product")) {
+            list= LoadPro(Path);
         }
        return  list;
     }
@@ -54,6 +67,14 @@ public class DataBase  {
         List<Category> categories= (List<Category>)OIS.readObject();
         OIS.close();
         return categories;
+    }
+    private static Object LoadPro(String path) throws IOException, ClassNotFoundException {
+        File file=new File(path);
+        FileInputStream FIS=new FileInputStream(file);
+        ObjectInputStream OIS=new ObjectInputStream(FIS);
+        List<Product> productList= (List<Product>)OIS.readObject();
+        OIS.close();
+        return productList;
     }
     private static Object LoadEmploye(String path) throws IOException, ClassNotFoundException {
         File file=new File(path);

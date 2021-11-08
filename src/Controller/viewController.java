@@ -1,6 +1,7 @@
 package Controller;
 
 import View.ManagerEmploDemo;
+import View.ManagerProductDemo;
 import View.MnagerCategoryDemo;
 
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class viewController {
 
         do {
             System.out.println("--------------------------------------------------\n     Grocery Shop System     \n--------------------------------------------------");
-            System.out.println("1.Go to Employee\n2.Go to Category\n0.To Exit");
+            System.out.println("1.Go to Employee\n2.Go to Category\n3.Go to Product\n0.To Exit");
             chosen= Input.nextInt();
             switch (chosen) {
 
@@ -24,6 +25,9 @@ public class viewController {
                     break;
                 case 2:
                     MnagerCategoryDemo.ManageCatDemo();
+                    break;
+                case 3:
+                    ManagerProductDemo.manageProduct();
                     break;
                 case 0:
                     System.out.println("Good bye manager .");

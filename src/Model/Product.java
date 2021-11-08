@@ -68,5 +68,13 @@ public class Product implements Serializable {
         this.addPrice = addPrice;
     }
 
-
+    @Override
+    public String toString() {
+        return "\n              Product              \n" +"--------------------------------------------------\n"+
+                "Product ID : " + productID +
+                "\nProduct : " + addProduct  +
+                "\nQuantity : " + addQuantity +
+                "\nPrice : " + addPrice +"\n--------------------------------------------------"
+                ;
+    }
 }

@@ -22,6 +22,9 @@ public class MnagerCategoryDemo {
             categories= (List<Category>) DataBase.LoadDataOfFile(type,path);
         }catch (FileNotFoundException | ClassNotFoundException exception){
             categories= new ArrayList<>();
+        }catch (EOFException exception){
+            categories =new ArrayList<>();
+
         }
 
     int choose = -1;
@@ -59,7 +62,7 @@ public class MnagerCategoryDemo {
                     }catch (NullPointerException exception){
                 categories =new ArrayList<>();
                 categories.add(new Category(CatEid, CatType, CatDes));
-            }
+                 }
                 }
                 DataBase.SaveDataToFile(path,categories);
                 break;
@@ -140,16 +143,15 @@ public class MnagerCategoryDemo {
                     while (li.hasNext()) {
                         Category e = (Category) li.next();
                         if (e.getCategoryID() == CatId) {
+                            li.remove();
                             found = true;
-                            System.out.print("Enter the Category Id Using Numbers :");
-                            int CatEid = input.nextInt();
                             System.out.print("Enter the Category type :");
                             String CatType = sc.nextLine();
                             System.out.print("Enter the Category Descrepstion :");
                             String CatDes = sc.nextLine();
                             System.out.println("--------------------------------------------------");
                             try {
-                                categories.add(new Category(CatEid, CatType, CatDes));
+                                li.add(new Category(CatId, CatType, CatDes));
                             } catch (InputMismatchException exception) {
                                 System.out.println("There a problem with Input of data  ");
                             }

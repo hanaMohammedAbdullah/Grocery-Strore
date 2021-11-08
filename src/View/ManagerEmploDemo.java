@@ -1,6 +1,7 @@
 package View;
 
 import Controller.DataBase;
+import Model.Category;
 import Model.ManageEmplo;
 import Model.employee;
 
@@ -23,6 +24,8 @@ public class ManagerEmploDemo implements ManageEmplo {
              employees= (List<employee>) DataBase.LoadDataOfFile(type,path);
         }catch (FileNotFoundException exception){
             employees= new ArrayList<>();
+        }catch (EOFException exception){
+            employees =new ArrayList<>();
         }
 
         ListIterator li=null;
@@ -38,7 +41,7 @@ public class ManagerEmploDemo implements ManageEmplo {
             System.out.println("6.Sorting Employee Using  id :");
             System.out.println("7.Sorting Employee Using  name :");
             System.out.println("8.Filter Employee  by age :");
-            System.out.println("0.Exit from Category: ");
+            System.out.println("0.Exit from Employee managing: ");
             choose=input.nextInt();
             int CateTimes;
 
@@ -144,20 +147,15 @@ public class ManagerEmploDemo implements ManageEmplo {
 
                 case 5:
                     if(!employees.isEmpty()) {
-
                         boolean found = false;
                         System.out.print("Enter the Employee id to Update : ");
                         int emplo=input.nextInt();
-
                         li = employees.listIterator();
 
                         while (li.hasNext()) {
                             employee e = (employee) li.next();
                             if (e.getEid() == emplo) {
-
                                 found = true;
-                                System.out.print("Enter the Employee Id Using Numbers :");
-                                int EmpEid = input.nextInt();
                                 System.out.print("Enter the Employee Password :");
                                 String EmpPass = sc.nextLine();
                                 System.out.print("Enter the Employee name :");
@@ -170,14 +168,14 @@ public class ManagerEmploDemo implements ManageEmplo {
                                 String EmpPhon = sc.nextLine();
 
                                 try {
-                                    li.set(new employee(EmpEid,EmpName,EmpGen,EmpAg,EmpPhon,EmpPass));
+                                    li.set(new employee(emplo,EmpName,EmpGen,EmpAg,EmpPhon,EmpPass));
                                 }catch (InputMismatchException exception){
                                     System.out.println("There a problem with Input of data  ");
 
                                 }
 
 
-                                System.out.println(e);
+                                System.out.println(li.next());
                             }
                         }if ((found)) {
                             System.out.println("--------------------------------------------------");
@@ -193,7 +191,6 @@ public class ManagerEmploDemo implements ManageEmplo {
                     }
                     break;
                 case 6:
-
                     if (!employees.isEmpty()) {
 
                         Collections.sort(employees, new Comparator<employee>() {
@@ -247,9 +244,9 @@ public class ManagerEmploDemo implements ManageEmplo {
                     break;
                 default :
                     System.out.println("This chose is is not valide : " + choose);
-
-            } }while(choose != 0);
-
+                    break;
+            }
+        }while(choose != 0);
 
     }
 

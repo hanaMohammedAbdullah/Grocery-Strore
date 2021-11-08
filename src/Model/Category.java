@@ -8,9 +8,7 @@ public class Category implements Serializable {
       String categoryType;
       String categoryDescription;
 
-  public Category(){
-      super();
-  }
+
 
     public Category(int categoryID, String categoryType, String categoryDescription){
         super();
