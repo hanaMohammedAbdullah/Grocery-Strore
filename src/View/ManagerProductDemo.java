@@ -15,7 +15,7 @@ public class ManagerProductDemo {
         ListIterator li;
 
         String type = "product";
-        String path = "src\\Files\\Product.txt";
+        String path = "src\\Controller\\Files\\Product.txt";
         List<Product> products = null;
 
         try {

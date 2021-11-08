@@ -11,12 +11,12 @@ import java.util.List;
 public class DataBase  {
 
     public static void SaveDataToFile(String path, Object list) throws IOException{
-        if(path.equals("src\\Files\\Employee.txt")) {
+        if(path.equals("src\\Controller\\Files\\Employee.txt")) {
             saveEmplo(path, (List<employee>) list);
         }
-        else if(path.equals("src\\Files\\categories.txt")) {
+        else if(path.equals("src\\Controller\\Files\\categories.txt")) {
             saveCat(path, (List<Category>) list);
-        }else if(path.equals("src\\Files\\Product.txt")) {
+        }else if(path.equals("src\\Controller\\Files\\Product.txt")) {
             savePro(path, (List<Product>) list);
         }
 

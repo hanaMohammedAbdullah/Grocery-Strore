@@ -16,7 +16,7 @@ public class MnagerCategoryDemo {
 
     ListIterator li ;
     String type="cat";
-    String path = "src\\Files\\categories.txt";
+    String path = "src\\Controller\\Files\\categories.txt";
 
         try {
             categories= (List<Category>) DataBase.LoadDataOfFile(type,path);

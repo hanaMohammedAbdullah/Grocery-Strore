@@ -1,4 +1,4 @@
-package Server;
+package Controller.Server;
 
 import Controller.viewController;
 import Model.packet;

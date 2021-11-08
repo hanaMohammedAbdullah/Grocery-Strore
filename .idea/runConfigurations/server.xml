@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="server" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="Server.Server" />
+    <option name="MAIN_CLASS_NAME" value="Controller.Server.Server" />
     <module name="untitled104" />
     <method v="2">
       <option name="Make" enabled="true" />

@@ -16,7 +16,7 @@ public class ManagerEmploDemo implements ManageEmplo {
         Scanner sc = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
         String type="employee";
-        String path="src\\Files\\Employee.txt";
+        String path="src\\Controller\\Files\\Employee.txt";
         List<employee> employees;
 
         // Loading the data
