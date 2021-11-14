@@ -7,12 +7,16 @@ import Model.employee;
 
 
 import java.io.*;
+import java.net.Socket;
 import java.util.*;
 
 public class ManagerEmploDemo implements ManageEmplo {
 
-    public static void ManagerEmployee() throws Exception {
+    public static void main(String args[]) throws Exception {
 
+        Socket socket =new Socket("127.0.0.1",5678);
+        ObjectOutputStream out =new ObjectOutputStream(socket.getOutputStream() );
+        ObjectInputStream in= new ObjectInputStream(socket.getInputStream());
         Scanner sc = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
         String type="employee";
@@ -72,7 +76,7 @@ public class ManagerEmploDemo implements ManageEmplo {
                             employees.add(new employee(EmpEid, EmpName, EmpGen, EmpAg, EmpPhon, EmpPass));
                         }
                     }
-                    DataBase.SaveDataToFile(path,employees);
+                 //   DataBase.SaveDataToFile(path,employees);
                     System.out.println("--------------------------------------------------");
 
                     break;
@@ -132,7 +136,7 @@ public class ManagerEmploDemo implements ManageEmplo {
                             }
                         }
                         if((found)) {
-                            DataBase.SaveDataToFile(path,employees);
+                          //  DataBase.SaveDataToFile(path,employees);
                             System.out.println("The Record Delete Successfully"+"\n--------------------------------------------------");
                         }
                         else{
@@ -179,7 +183,7 @@ public class ManagerEmploDemo implements ManageEmplo {
                             }
                         }if ((found)) {
                             System.out.println("--------------------------------------------------");
-                            DataBase.SaveDataToFile(path,employees);
+                           // DataBase.SaveDataToFile(path,employees);
                             System.out.println("The Record Update Successfully\n--------------------------------------------------");
                         }
                         else{
@@ -199,7 +203,7 @@ public class ManagerEmploDemo implements ManageEmplo {
                                 return o1.getEid()-o2.getEid();
                             }
                         });
-                        DataBase.SaveDataToFile(path,employees);
+                       // DataBase.SaveDataToFile(path,employees);
                         li = employees.listIterator();
 
                         while (li.hasNext()) {
@@ -220,7 +224,6 @@ public class ManagerEmploDemo implements ManageEmplo {
                                 return o1.getName().compareTo(o2.getName());
                             }
                         });
-                        DataBase.SaveDataToFile(path,employees);
                         li = employees.listIterator();
 
                         while (li.hasNext()) {
@@ -247,6 +250,13 @@ public class ManagerEmploDemo implements ManageEmplo {
                     break;
             }
         }while(choose != 0);
+        try {
+            out.writeObject(employees);
+            out.flush();
+        }catch (NullPointerException exception){
+            exception.printStackTrace();
+        }
+
 
     }
 

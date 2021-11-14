@@ -21,13 +21,13 @@ public class viewController {
             switch (chosen) {
 
                 case 1:
-                    ManagerEmploDemo.ManagerEmployee();
+                 //   ManagerEmploDemo.ManagerEmployee();
                     break;
                 case 2:
-                    MnagerCategoryDemo.ManageCatDemo();
+                //    MnagerCategoryDemo.ManageCatDemo();
                     break;
                 case 3:
-                    ManagerProductDemo.manageProduct();
+                 //   ManagerProductDemo.manageProduct();
                     break;
                 case 0:
                     System.out.println("Good bye manager .");

@@ -1,16 +1,12 @@
 import Controller.viewController;
 import Model.packet;
-
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.ConnectException;
 import java.net.Socket;
 import java.util.Scanner;
 
 class clientn implements Serializable {
-
     public static void main(String[] args) throws Exception {
         Scanner sc=new Scanner(System.in);
         ObjectOutputStream out=null;

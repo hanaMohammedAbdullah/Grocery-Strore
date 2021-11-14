@@ -6,25 +6,20 @@ import java.util.*;
 
 public class MnagerCategoryDemo {
 
-    public static  void ManageCatDemo() throws IOException{
-
+    public static  void main(String args[]) throws IOException{
     Scanner sc = new Scanner(System.in);
-
     Scanner input = new Scanner(System.in);
 
     List<Category> categories ;
-
     ListIterator li ;
-    String type="cat";
-    String path = "src\\Controller\\Files\\categories.txt";
-
+        String type="cat";
+        String path = "src\\Controller\\Files\\categories.txt";
         try {
             categories= (List<Category>) DataBase.LoadDataOfFile(type,path);
         }catch (FileNotFoundException | ClassNotFoundException exception){
             categories= new ArrayList<>();
         }catch (EOFException exception){
             categories =new ArrayList<>();
-
         }
 
     int choose = -1;
@@ -37,12 +32,10 @@ public class MnagerCategoryDemo {
         System.out.println("5.Update a  Ctaegory :");
         System.out.println("0.Exit from Category: ");
         choose = input.nextInt();
-
         int CateTimes;
         switch (choose) {
             case 1:
                 System.out.println("--------------------------------------------------\nWelcome manager how many category you will add");
-
                 CateTimes = input.nextInt();
                 for (int i = 0; i < CateTimes; i++) {
                     System.out.print("Enter the Category Id Using Numbers :");
@@ -51,9 +44,7 @@ public class MnagerCategoryDemo {
                     String CatType = sc.nextLine();
                     System.out.print("Enter the Category Descrepstion :");
                     String CatDes = sc.nextLine();
-
                     System.out.println("--------------------------------------------------");
-
                     try {
                         categories.add(new Category(CatEid, CatType, CatDes));
                     } catch (InputMismatchException e) {
@@ -68,9 +59,7 @@ public class MnagerCategoryDemo {
                 break;
             case 2:
                 if (!categories.isEmpty()) {
-
                         li = categories.listIterator();
-
                         while (li.hasNext()) {
                             System.out.println(li.next());
                         }
@@ -86,9 +75,7 @@ public class MnagerCategoryDemo {
                 System.out.print("Enter the Category id to Find :");
                 int CatID = input.nextInt();
                 li = categories.listIterator();
-
                 while (li.hasNext()) {
-
                     Category e = (Category) li.next();
                     if (e.getCategoryID() == CatID) {
                         found = true;
@@ -106,7 +93,6 @@ public class MnagerCategoryDemo {
 
             case 4:
                 if (!categories.isEmpty()) {
-
                     boolean found = false;
                     System.out.print("Enter the Category Id to Delete : ");
                     int CatId = input.nextInt();
@@ -139,7 +125,6 @@ public class MnagerCategoryDemo {
                     System.out.print("Enter the Category id to Update : ");
                     int CatId = input.nextInt();
                     li = categories.listIterator();
-
                     while (li.hasNext()) {
                         Category e = (Category) li.next();
                         if (e.getCategoryID() == CatId) {
@@ -162,7 +147,6 @@ public class MnagerCategoryDemo {
                             DataBase.SaveDataToFile(path,categories);
                             System.out.println("The Record Update Successfully");
                             System.out.println("--------------------------------------------------");
-
                         } else{
                             System.out.println("--------------------------------------------------\nRecord not Found....!\n--------------------------------------------------");
                         }
@@ -175,7 +159,6 @@ public class MnagerCategoryDemo {
                 break;
             default:
                 System.out.println("This chose is is not valide : " + choose);
-
         }
     }while(choose !=0);
 }

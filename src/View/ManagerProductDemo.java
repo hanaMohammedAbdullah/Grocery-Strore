@@ -2,215 +2,241 @@ package View;
 
 import Controller.DataBase;
 import Model.Product;
-import java.io.EOFException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
+import java.io.*;
+import java.net.Socket;
 import java.util.*;
 
 public class ManagerProductDemo {
-    public static void manageProduct() throws IOException {
+    public static void main(String args[]) throws IOException {
         Scanner sc = new Scanner(System.in);
         Scanner input = new Scanner(System.in);
-
+        Socket socket = new Socket("127.0.0.1", 4444);
+        System.out.println("connected to the server");
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        PrintWriter PW = new PrintWriter(socket.getOutputStream(), true);// for client terminal
+        BufferedReader BR = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ListIterator li;
-
-        String type = "product";
-        String path = "src\\Controller\\Files\\Product.txt";
-        List<Product> products = null;
-
         try {
-            products = (List<Product>) DataBase.LoadDataOfFile(type, path);
-        } catch (FileNotFoundException | ClassNotFoundException exception) {
-            products = new ArrayList<>();
-        } catch (EOFException exception) {
-            products = new ArrayList<>();
+            while (true) {
+                String type = "product";
+                String path = "src\\Controller\\Files\\Product.txt";
+                List<Product> products = null;
+                String ms = null;
+                System.out.println("write Load to Load the previous data \nTo exit Write exit");
+                ms = sc.nextLine();
+                PW.println(ms);
+                if (ms.contains("exit")) break;
+                else {
+                    try {
+                        products = (List<Product>) in.readObject();
+                    } catch (FileNotFoundException | ClassNotFoundException exception) {
+                        products = new ArrayList<>();
+                    } catch (EOFException exception) {
+                        products = new ArrayList<>();
 
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-        int choose = -1;
-        do {
-            System.out.println(" \nWelcome manager Enter your choice you : ");
-            System.out.println("1.add New Product: ");
-            System.out.println("2.Display Product Information : ");
-            System.out.println("3.Search for a  Product : ");
-            System.out.println("4.Delete a  Product :");
-            System.out.println("5.Update a  Product :");
-            System.out.println("6.Sorting Product Using  id :");
-            System.out.println("7.Sorting Product Using  name :");
-            System.out.println("0.Exit from Product: ");
-            choose = input.nextInt();
-            int protype;
-            switch (choose) {
-                case 1:
-                    System.out.println("--------------------------------------------------\nWelcome manager how many category you will add");
-                    protype = input.nextInt();
-                    for (int i = 0; i < protype; i++) {
-                        System.out.print("Enter the Product Id Using Numbers :");
-                        int proid = input.nextInt();
-                        System.out.print("Enter the Product  :");
-                        String product = sc.nextLine();
-                        System.out.print("Enter the Product Quantity :");
-                        int quantity = input.nextInt();
-                        System.out.print("Enter the Product Price of each :");
-                        double price = input.nextDouble();
-                        System.out.println("--------------------------------------------------");
-                        try {
-                            products.add(new Product(proid, product, quantity, price));
-                        } catch (InputMismatchException e) {
-                            System.out.println("There a problem with Input of data  ");
-                        } catch (NullPointerException exception) {
-                            products = new ArrayList<>();
-                            products.add(new Product(proid, product, quantity, price));
-                        }
-
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
                     }
-                   DataBase.SaveDataToFile(path,products);
-                    System.out.println("--------------------------------------------------");
-                    break;
+                    int choose = -1;
+                    do {
+                        System.out.println(" \nWelcome manager Enter your choice you : ");
+                        System.out.println("1.add New Product: ");
+                        System.out.println("2.Display Product Information : ");
+                        System.out.println("3.Search for a  Product : ");
+                        System.out.println("4.Delete a  Product :");
+                        System.out.println("5.Update a  Product :");
+                        System.out.println("6.Sorting Product Using  id :");
+                        System.out.println("7.Sorting Product Using  name :");
+                        System.out.println("0.Exit from Product: ");
+                        choose = input.nextInt();
+                        int protype;
+                        switch (choose) {
+                            case 1:
+                                System.out.println("--------------------------------------------------\nWelcome manager how many category you will add");
+                                protype = input.nextInt();
+                                for (int i = 0; i < protype; i++) {
+                                    System.out.print("Enter the Product Id Using Numbers :");
+                                    int proid = input.nextInt();
+                                    System.out.print("Enter the Product  :");
+                                    String product = sc.nextLine();
+                                    System.out.print("Enter the Product Quantity :");
+                                    int quantity = input.nextInt();
+                                    System.out.print("Enter the Product Price of each :");
+                                    double price = input.nextDouble();
+                                    System.out.println("--------------------------------------------------");
+                                    try {
+                                        products.add(new Product(proid, product, quantity, price));
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("There a problem with Input of data  ");
+                                    } catch (NullPointerException exception) {
+                                        products = new ArrayList<>();
+                                        products.add(new Product(proid, product, quantity, price));
+                                    }
 
-                case 2:
-                    if(!products.isEmpty()) {
-                        li = products.listIterator();
-                        while (li.hasNext()) {
-                            System.out.println(li.next());
-                        }
-                    } else {
-                        System.out.println("--------------------------------------------------"+"\nFile Doesn't Exist....!"+"\n--------------------------------------------------");
-                    }
-                    break;
-                case 3:
-                    if(!products.isEmpty()) {
+                                }
 
-                        boolean found = false;
-                        System.out.print("Enter the Employee id to Find :");
-                        int pro = input.nextInt();
-                        li = products.listIterator();
+                                System.out.println("--------------------------------------------------");
+                                break;
 
-                        while (li.hasNext()) {
-                            Product e = (Product) li.next();
-                            if (e.getProductID() == pro) {
-                                found = true;
-                                System.out.println(e);
-                            }
+                            case 2:
+                                if (!products.isEmpty()) {
+                                    li = products.listIterator();
+                                    while (li.hasNext()) {
+                                        System.out.println(li.next());
+                                    }
+                                } else {
+                                    System.out.println("--------------------------------------------------" + "\nFile Doesn't Exist....!" + "\n--------------------------------------------------");
+                                }
+                                break;
+                            case 3:
+                                if (!products.isEmpty()) {
+
+                                    boolean found = false;
+                                    System.out.print("Enter the Employee id to Find :");
+                                    int pro = input.nextInt();
+                                    li = products.listIterator();
+
+                                    while (li.hasNext()) {
+                                        Product e = (Product) li.next();
+                                        if (e.getProductID() == pro) {
+                                            found = true;
+                                            System.out.println(e);
+                                        }
+                                    }
+                                    if ((!found)) {
+                                        System.out.println("--------------------------------------------------" + "\nRecord not Found....!" + "\n--------------------------------------------------");
+                                    }
+                                } else {
+                                    System.out.println("--------------------------------------------------" + "\nFile Doesn't Exist....!" + "\n--------------------------------------------------");
+                                }
+                                break;
+                            case 4:
+                                if (!products.isEmpty()) {
+                                    boolean found = false;
+                                    System.out.print("Enter the Employee id to Find :");
+                                    int pro = input.nextInt();
+                                    li = products.listIterator();
+                                    while (li.hasNext()) {
+                                        Product e = (Product) li.next();
+                                        if (e.getProductID() == pro) {
+                                            found = true;
+                                            li.remove();
+                                            System.out.println(e);
+                                        }
+                                    }
+                                    if ((found)) {
+
+                                        System.out.println("The Record Delete Successfully" + "\n--------------------------------------------------");
+                                    } else {
+                                        System.out.println("Record not Found....!" + "\n--------------------------------------------------");
+                                    }
+                                } else {
+                                    System.out.println("--------------------------------------------------\n" + "File Doesn't Exist....!" + "--------------------------------------------------");
+
+                                }
+                                break;
+                            case 5:
+                                if (!products.isEmpty()) {
+                                    boolean found = false;
+                                    System.out.print("Enter the Employee id to Update : ");
+                                    int proid = input.nextInt();
+                                    li = products.listIterator();
+                                    while (li.hasNext()) {
+                                        Product e = (Product) li.next();
+                                        if (e.getProductID() == proid) {
+                                            found = true;
+                                            System.out.print("Enter the Product  :");
+                                            String product = sc.nextLine();
+                                            System.out.print("Enter the Product Quantity :");
+                                            int quantity = input.nextInt();
+                                            System.out.print("Enter the Product Price of each :");
+                                            double price = input.nextDouble();
+                                            System.out.println("--------------------------------------------------");
+                                            try {
+                                                li.set(new Product(proid, product, quantity, price));
+                                            } catch (InputMismatchException exception) {
+                                                System.out.println("There a problem with Input of data  ");
+                                            }
+                                            System.out.println(li.next());
+                                        }
+                                    }
+                                    if ((found)) {
+                                        System.out.println("--------------------------------------------------");
+                                        System.out.println("The Record Update Successfully\n--------------------------------------------------");
+                                    } else {
+                                        System.out.println("--------------------------------------------------\nRecord not Found....!\n--------------------------------------------------");
+                                    }
+                                } else {
+                                    System.out.println("--------------------------------------------------\n" + "File Doesn't Exist....!" + "--------------------------------------------------");
+                                }
+
+                                break;
+                            case 6:
+                                if (!products.isEmpty()) {
+
+                                    Collections.sort(products, new Comparator<Product>() {
+                                        @Override
+                                        public int compare(Product o1, Product o2) {
+                                            return o1.getProductID() - o2.getProductID();
+                                        }
+                                    });
+                                    //   DataBase.SaveDataToFile(path,products);
+                                    li = products.listIterator();
+
+                                    while (li.hasNext()) {
+                                        System.out.println(li.next());
+                                    }
+                                } else {
+                                    System.out.println("--------------------------------------------------\n" + "File Doesn't Exist....!" + "\n--------------------------------------------------");
+                                }
+
+                                break;
+
+                            case 7:
+                                if (!products.isEmpty()) {
+
+                                    Collections.sort(products, new Comparator<Product>() {
+                                        @Override
+                                        public int compare(Product o1, Product o2) {
+                                            return o1.getAddProduct().compareTo(o2.getAddProduct());
+                                        }
+                                    });
+                                    //DataBase.SaveDataToFile(path,products);
+                                    li = products.listIterator();
+                                    while (li.hasNext()) {
+                                        System.out.println(li.next());
+                                    }
+                                } else {
+                                    System.out.println("--------------------------------------------------\n" + "File Doesn't Exist....!" + "\n--------------------------------------------------");
+                                }
+
+                                break;
+                            case 0:
+                                System.out.println("Have a nice Day Manager.");
+                                break;
+                            default:
+                                System.out.println("This chose is is not valide : " + choose);
+                                break;
                         }
-                        if ((!found)) {
-                            System.out.println("--------------------------------------------------" + "\nRecord not Found....!" + "\n--------------------------------------------------");
-                        }
-                    }else{
-                        System.out.println("--------------------------------------------------"+"\nFile Doesn't Exist....!"+"\n--------------------------------------------------");
-                    }
-                    break;
-                case 4:
-                    if(!products.isEmpty()) {
-                        boolean found = false;
-                        System.out.print("Enter the Employee id to Find :");
-                        int pro = input.nextInt();
-                        li = products.listIterator();
-                        while (li.hasNext()) {
-                            Product e = (Product) li.next();
-                            if (e.getProductID() == pro) {
-                                found = true;
-                                li.remove();
-                                System.out.println(e);
-                            }
-                        }
-                        if ((found)) {
-                              DataBase.SaveDataToFile(path,products);
-                            System.out.println("The Record Delete Successfully"+"\n--------------------------------------------------");
-                        }else{
-                            System.out.println("Record not Found....!"+"\n--------------------------------------------------");
-                        }
-                    }else{
-                    System.out.println("--------------------------------------------------\n"+"File Doesn't Exist....!"+"--------------------------------------------------");
+
+
+                    } while (choose != 0);
+
 
                 }
-                    break;
-                case 5:
-                    if(!products.isEmpty()) {
-                        boolean found = false;
-                        System.out.print("Enter the Employee id to Update : ");
-                        int proid = input.nextInt();
-                        li = products.listIterator();
-                        while (li.hasNext()) {
-                            Product e = (Product) li.next();
-                            if (e.getProductID() == proid) {
-                                found = true;
-                                System.out.print("Enter the Product  :");
-                                String product = sc.nextLine();
-                                System.out.print("Enter the Product Quantity :");
-                                int quantity = input.nextInt();
-                                System.out.print("Enter the Product Price of each :");
-                                double price = input.nextDouble();
-                                System.out.println("--------------------------------------------------");
-                                try {
-                                    li.set(new Product(proid,product,quantity,price));
-                                }catch (InputMismatchException exception){
-                                    System.out.println("There a problem with Input of data  ");
-                                }
-                                System.out.println(li.next());
-                            }
-                        }if ((found)) {
-                            System.out.println("--------------------------------------------------");
-                     //       DataBase.SaveDataToFile(path,products);
-                            System.out.println("The Record Update Successfully\n--------------------------------------------------");
-                        }
-                        else{
-                            System.out.println("--------------------------------------------------\nRecord not Found....!\n--------------------------------------------------");
-                        }
-                    }
-                    else{
-                        System.out.println("--------------------------------------------------\n"+"File Doesn't Exist....!"+"--------------------------------------------------");
-                    }
 
-                    break;
-                case 6:
-                    if (!products.isEmpty()) {
-
-                        Collections.sort(products, new Comparator<Product>() {
-                            @Override
-                            public int compare(Product o1, Product o2) {
-                                return o1.getProductID()-o2.getProductID();
-                            }
-                        });
-                       DataBase.SaveDataToFile(path,products);
-                        li = products.listIterator();
-
-                        while (li.hasNext()) {
-                            System.out.println(li.next());
-                        }
-                    }
-                    else{
-                        System.out.println("--------------------------------------------------\n"+"File Doesn't Exist....!"+"\n--------------------------------------------------");
-                    }
-                    break;
-
-                case 7:
-                    if (!products.isEmpty()) {
-
-                        Collections.sort(products, new Comparator<Product>() {
-                            @Override
-                            public int compare(Product o1, Product o2) {
-                                return o1.getAddProduct().compareTo(o2.getAddProduct());
-                            }
-                        });
-                       DataBase.SaveDataToFile(path,products);
-                        li = products.listIterator();
-                        while (li.hasNext()) {
-                            System.out.println(li.next());
-                        }
-                    }
-                    else{
-                        System.out.println("--------------------------------------------------\n"+"File Doesn't Exist....!"+"\n--------------------------------------------------");
-                    }
-                    break;
-                case 0:
-                    System.out.println("Have a nice Day Manager.");
-                    break;
-                default :
-                    System.out.println("This chose is is not valide : " + choose);
-                    break;
             }
-        }while (choose != 0) ;
+
+        } catch (NullPointerException exception) {
+            exception.printStackTrace();
+        }finally {
+            PW.close();
+            BR.close();
+            in.close();
+            out.close();
+
+        }
     }
 }
