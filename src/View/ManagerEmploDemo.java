@@ -1,7 +1,5 @@
 package View;
 
-import Controller.DataBase;
-import Model.Category;
 import Model.ManageEmplo;
 import Model.employee;
 

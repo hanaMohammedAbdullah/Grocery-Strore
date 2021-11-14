@@ -1,6 +1,5 @@
 package View;
 
-import Controller.DataBase;
 import Model.Product;
 
 import java.io.*;
