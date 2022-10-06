@@ -36,11 +36,6 @@ responsible for Building and Designing the project.
   4. more Secure 
   5. need fewer employees(Counter, money manager)
 
-### Phase 
-In this project, we use the V-model because we need to consistently keep track of the detail and verify the step.
-
-the phase strat with gathering requirements .then Design, and planning for the system .after that will start coding the project. Then the testing phase for our project but depends on the deadline. Finally the deployment of our project.
-
 
 ## Content Structure 
 
@@ -50,7 +45,7 @@ The content is will be in the same in the below Diagram architecture :
 ![This is an image](./Presentation1.svg)
 
 
-## Fubctionality 
+## Functionality 
 Because the project has two levels (manager & Seller) the functionality of each one is different and in order to separate their  functionality we need to log in:
 1. LOG IN 
    - ADD ID
@@ -92,13 +87,19 @@ this system is accessible only for the  Manager and the Seller because it is not
  ## Ongoing  Support / maintenance  
  This project is will be done by the team and will be seeing by us till 3 month on market if only need maintaining a problems but the support for adding new feature  in the future it will add new budget depend on the requirement and the time: 
 
-  [ x ] Same team 
+  [  x  ] Same team 
 
-  [  ] another team
+  [   ] another team
+
 
 ## Milestone & Deadline 
 this project is requested by L.polla Fattah the period is 23 Weeks 
 every week it will cover a request from him and every 2 weeks will review the last and add the new request to the system.
+
+### Phase 
+In this project, we use the V-model because we need to consistently keep track of the detail and verify the step.
+
+the phase strat with gathering requirements .then Design, and planning for the system .after that will start coding the project. Then the testing phase for our project but depends on the deadline. Finally the deployment of our project.
 
 ## The Tool and Program used:
 The Programing language used is :
