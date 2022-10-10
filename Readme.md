@@ -93,7 +93,7 @@ this system is accessible only for the  Manager and the Seller because it is not
 
 
 ## Milestone & Deadline 
-this project is requested by L.polla Fattah the period is 23 Weeks 
+this project is requested by L.polla Fattah the period is 12 Weeks 
 every week it will cover a request from him and every 2 weeks will review the last and add the new request to the system.
 
 ### Phase 
